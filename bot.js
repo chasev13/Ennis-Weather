@@ -6,7 +6,7 @@ var config = require('./config');
 
 var T = new Twit(config);
 var weather_data;
-
+tweet();
 // post the weather tweet
 function tweet(){
   weather.find({search: 'Ennis, TX', degreeType: 'F'},
