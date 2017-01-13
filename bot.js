@@ -4,7 +4,6 @@ var weather = require('weather-js');
 var Twit = require('twit');
 var config = require('./config');
 var CronJob = require('cron').CronJob;
-// TODO add forever package to continuously run program on Amazon EC2
 
 var T = new Twit(config);
 var weather_data;
