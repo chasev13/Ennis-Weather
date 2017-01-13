@@ -5,43 +5,35 @@ var Twit = require('twit');
 var config = require('./config');
 
 var T = new Twit(config);
-// Options:
-// search:     location name or zipcode
-// degreeType: F or C
 var weather_data;
-weather.find({search: 'Ennis, TX', degreeType: 'F'},
-function(err, result) {
-  if (err){
-    console.log(err);
-  }
-  else {
-    weather_data = result;
-    //console.log(JSON.stringify(result, null, 2));
-    weather_data = weather_data[0];
-    current = weather_data['current'];
-    var tweet_text = 'The skies are ' + current.skytext.toLowerCase() +
-    ' and it feels like ' + current.feelslike + '°F ' +
-    'with winds at ' + current.windspeed;
-    tweet(tweet_text);
 
-  }
-});
-
-
-// post a tweet
-function tweet(text){
-  T.post('statuses/update', { status: text },
-  function(err, data, response) {
+// post the weather tweet
+function tweet(){
+  weather.find({search: 'Ennis, TX', degreeType: 'F'},
+  function(err, result) {
     if (err){
       console.log(err);
     }
-    else{
-      console.log('tweeted: ' + data.text)
+    else {
+      weather_data = result;
+      weather_data = weather_data[0];
+      current = weather_data['current'];
+      var tweet_text = 'The skies are ' + current.skytext.toLowerCase() +
+      ' and it feels like ' + current.feelslike + '°F ' +
+      'with winds at ' + current.windspeed;
+
+      T.post('statuses/update', { status: tweet_text },
+      function(err, data, response) {
+        if (err){
+          console.log(err);
+        }
+        else{
+          console.log('tweeted: ' + data.text)
+        }
+
+      })
     }
-
-  })
 }
-
 
 
 
