@@ -20,18 +20,15 @@ function(err, result) {
     weather_data = weather_data[0];
     current = weather_data['current'];
     var tweet_text = 'The skies are ' + current.skytext.toLowerCase() +
-    ' and it feels like ' + current.feelslike + ' °F ' +
+    ' and it feels like ' + current.feelslike + '°F ' +
     'with winds at ' + current.windspeed;
     tweet(tweet_text);
 
   }
 });
-// var tweet = {
-//   status:
-// }
 
 
-// wrap the tweet into a function
+// post a tweet
 function tweet(text){
   T.post('statuses/update', { status: text },
   function(err, data, response) {
@@ -39,7 +36,7 @@ function tweet(text){
       console.log(err);
     }
     else{
-      console.log('it worked')
+      console.log('tweeted: ' + data.text)
     }
 
   })
