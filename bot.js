@@ -23,19 +23,19 @@ function tweet(){
       'with winds at ' + current.windspeed;
 
       T.post('statuses/update', { status: tweet_text },
-      function(err, data, response) {
-        if (err){
-          console.log(err);
-        }
-        else{
-          console.log('tweeted: ' + data.text)
-        }
+        function(err, data, response) {
+          if (err){
+            console.log(err);
+          }
+          else{
+            console.log('tweeted: ' + data.text)
+          }
 
-      })
-    }
+        })
+      }
+    })
+
 }
-
-
 
 
 
